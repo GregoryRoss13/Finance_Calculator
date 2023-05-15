@@ -1,0 +1,48 @@
+import math
+
+# The first phase of this project is an input code which prompts the user
+# to choose a specific type of financial venture#
+
+finance_choice = input("Choose either 'investment' or 'bond' from the main menu to proceed: \n \ninvestment - to "
+                       "calculate the amount of interest you'll earn on your investment \nbond       - to calculate "
+                       "the amount you'll have to pay on a home loan \n")
+
+# Based on the users first input, if the input  was 'investment' I commanded the programme to question the user on
+# the amount they wished to invest# After all the variable inputs are entered through the first if statement(investment)
+# I coded the formula listed in Task 1 to print the total amount of interest# #  Simple interest -A=P(1+r*t) #
+# Compound interest - A=P(1+r)^t#
+
+if finance_choice == 'investment' or finance_choice == 'Investment' or finance_choice == 'INVESTMENT':
+    amount = float(input("please state the amount of money you wish to deposit: "))
+    percentage = float(input("please enter the desired percentage for the interest rate for this investment: "))
+    interest_rate = percentage / 100
+    time = float(input("how many years in total do you plan on investing?: "))
+    interest = input("would you like 'simple' or 'compound' interest?: ")
+    if interest == 'simple' or interest == 'Simple' or interest == 'SIMPLE':
+        simple_total = amount * (1 + interest_rate * time)
+        print("Based on the given amount of time you have specified for your investment \nas well as the interest rate "
+              "chosen, the amount of money you will have after investment will be £" + str(round(simple_total, 2)))
+    elif interest == 'compound' or interest == 'Compound' or interest == 'COMPOUND':
+        compound_total = amount * math.pow((1 + interest_rate), time)
+        print("Based on the given amount of time you have specified for your investment \nas well as the interest rate "
+              "chosen, the amount of money you will have after investment will be £" + str(round(compound_total, 2)))
+
+# If 'bond' was the first input choice then a separate elif statement will generate
+# a different set of prompt questions with different named variables #
+# the formula which  I was instructed to use in task 1 - x = (i.P)/(1-(1+i)^(-n)) - is used in the last part of my code
+# to generate the total amount required for the monthly bond repayment #
+
+elif finance_choice == 'bond' or finance_choice == 'Bond' or finance_choice == 'BOND':
+    house_price = float(input("please enter the value of the house?: "))
+    annual_interest_rate = float(input("please enter the annual interest rate of the house?: "))
+    monthly_interest_rate = annual_interest_rate / 100 * (1/12)
+    total_months = float(input("please enter the number of months in which you will make the  bond repayment?: "))
+    bond_repayment = (monthly_interest_rate * house_price) / (1 - math.pow((1 + monthly_interest_rate), -total_months))
+    print("The total amount of money you will have to repay each month for your property will be £" +
+          str(round(bond_repayment, 2)))
+
+# I created an else function code which would generate a message telling the user their input was invalid
+# If the wrong input was entered during the first prompt question (finance_choice) #
+
+else:
+    print("Sorry, you have entered an invalid input")
